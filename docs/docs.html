@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Design: Poll</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <style>
+        .wireframe-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #0d6efd;
+            text-decoration: underline;
+            font-size: 0.9em;
+            cursor: pointer;
+        }
+
+        /* Mermaid diagram styling fix for bootstrap context */
+        .mermaid {
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+
+    <div class="container py-5">
+        <h1 class="mb-5 text-dark">Technical and Visual Design: Polling Application</h1>
+
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <h2 class="h4 card-title text-primary">1. Poll Topic</h2>
+                <p><strong>Question:</strong> How many coffees a day is still healthy to drink?</p>
+                <p><strong>Response options:</strong></p>
+                <ul>
+                    <li>a) 0 to 1 (I am more of a tea or water person)</li>
+                    <li>b) 2 to 3 (The golden middle way)</li>
+                    <li>c) 4 or more (Caffeine is my fuel)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <h2 class="h4 card-title text-primary mb-4">2. User Interface Wireframes</h2>
+                <div class="row g-4">
+
+                    <div class="col-md-6">
+                        <div class="card border-secondary h-100 bg-white">
+                            <div class="card-header bg-secondary text-white text-center">
+                                View: Voting (F1)
+                            </div>
+                            <div class="card-body">
+                                <p class="fw-bold">How many coffees a day is still healthy to drink?</p>
+                                <form onsubmit="event.preventDefault();">
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="radio" name="vote" disabled>
+                                        <label class="form-check-label">a) 0 to 1</label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="radio" name="vote" disabled>
+                                        <label class="form-check-label">b) 2 to 3</label>
+                                    </div>
+                                    <div class="form-check mb-4">
+                                        <input class="form-check-input" type="radio" name="vote" disabled>
+                                        <label class="form-check-label">c) 4 or more</label>
+                                    </div>
+                                    <div class="d-grid">
+                                        <button class="btn btn-secondary" disabled>Vote</button>
+                                    </div>
+                                </form>
+                                <span class="wireframe-link">View results without voting</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card border-secondary h-100 bg-white">
+                            <div class="card-header bg-secondary text-white text-center">
+                                View: Results & Reset (F2, F3)
+                            </div>
+                            <div class="card-body">
+                                <p class="fw-bold">How many coffees a day is still healthy to drink?</p>
+
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between text-muted small mb-1">
+                                        <span>a) 0 to 1</span>
+                                        <span>15 votes</span>
+                                    </div>
+                                    <div class="progress" style="height: 10px;">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 30%;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between text-muted small mb-1">
+                                        <span>b) 2 to 3</span>
+                                        <span>30 votes</span>
+                                    </div>
+                                    <div class="progress" style="height: 10px;">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 60%;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between text-muted small mb-1">
+                                        <span>c) 4 or more</span>
+                                        <span>5 votes</span>
+                                    </div>
+                                    <div class="progress" style="height: 10px;">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 10%;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <span class="wireframe-link mb-4">Back to voting</span>
+
+                                <hr>
+
+                                <p class="text-muted small mb-2">Administration (F3):</p>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Enter secret token" disabled>
+                                    <button class="btn btn-danger" disabled>Reset</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <h2 class="h4 card-title text-primary">3. Application Flowchart</h2>
+                <p>Application traversal logic covering requirements F1 (Voting), F2 (Viewing), and F3 (Reset with
+                    validation).</p>
+                <div class="mermaid text-center">
+                    flowchart TD
+                    Start((Start)) --> UserDecide{What does the user do?}
+
+                    %% Branch F1: Voting
+                    UserDecide -->|Selects option| Vote[Clicks 'Vote']
+                    Vote --> ReqVote[POST /api/vote]
+                    ReqVote --> SaveDB[(Save to SQLite)]
+                    SaveDB --> RefreshData[Load new results]
+
+                    %% Branch F2: Viewing
+                    UserDecide -->|Just wants to see| View[Clicks 'View results']
+                    View --> ReqGet[GET /api/results]
+                    ReqGet --> ReadDB[(Read from SQLite)]
+
+                    %% Branch F3: Reset
+                    UserDecide -->|Wants to reset| ResetInput[Enters Token]
+                    ResetInput --> ResetClick[Clicks 'Reset']
+                    ResetClick --> ReqReset[POST /api/reset]
+                    ReqReset --> CheckToken{Is token OK?}
+
+                    CheckToken -- YES --> WipeDB[(Delete data in DB)]
+                    WipeDB --> RefreshData
+                    CheckToken -- NO --> Error[Return 403 error]
+                    Error --> ShowAlert[Show error message]
+
+                    %% Common output
+                    ReadDB --> ShowResults[Show Graphs]
+                    RefreshData --> ShowResults
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <h2 class="h4 card-title text-primary">4. Deployment Diagram</h2>
+                <p>Deployment architecture and communication between components.</p>
+                <div class="mermaid text-center">
+                    graph TD
+                    Client["Web Browser (React + Vite)"]
+                    Server["Backend Server (Node.js / Express)"]
+                    DB[("SQLite Database (File)")]
+
+                    Client -->|"HTTP GET /api/results"| Server
+                    Client -->|"HTTP POST /api/vote"| Server
+                    Client -->|"HTTP POST /api/reset"| Server
+
+                    Server -->|"Read/Write data"| DB
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <h2 class="h4 card-title text-primary">5. File and Folder Structure</h2>
+                <pre class="bg-dark text-light p-3 rounded">
+/voting-app
+├── /frontend                     # User interface
+│   ├── /src
+│   │   ├── /components
+│   │   │   ├── PollForm.jsx      # Voting form
+│   │   │   ├── PollResults.jsx   # Display of results and graphs
+│   │   │   └── ResetAdmin.jsx    # Component for reset with token
+│   │   ├── App.jsx               # Main component (routing/states)
+│   │   └── main.jsx
+│   ├── package.json
+│   └── vite.config.js            # Vite configuration (including proxy to backend)
+│
+├── /backend                      # Server part of the application
+│   ├── /src
+│   │   ├── server.js             # Server entry point (Express initialization)
+│   │   ├── routes.js             # API endpoint definitions
+│   │   └── database.js           # Settings and queries for SQLite
+│   ├── /data
+│   │   └── poll.sqlite           # Database file (persistent storage of votes)
+│   ├── /logs
+│   │   └── access.log            # File to log requests and errors
+│   ├── package.json
+│   └── .env                      # Configuration (Port, ADMIN_RESET_TOKEN)
+                </pre>
+            </div>
+        </div>
+
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <h2 class="h4 card-title text-primary">6. API Endpoints</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Method</th>
+                                <th>URL Endpoint</th>
+                                <th>Description and request/response body</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="badge bg-success">GET</span></td>
+                                <td><code>/api/results</code></td>
+                                <td>
+                                    Returns current voting states. No authorization is required.<br>
+                                    <em>Response:</em> <code>{ "options": [{ "id": "a", "votes": 15 }, ...] }</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-primary">POST</span></td>
+                                <td><code>/api/vote</code></td>
+                                <td>
+                                    Saves a new user vote.<br>
+                                    <em>Body:</em> <code>{ "optionId": "b" }</code><br>
+                                    <em>Response:</em> <code>{ "success": true, "options": [...] }</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-danger">POST</span></td>
+                                <td><code>/api/reset</code></td>
+                                <td>
+                                    Resets all votes if the token matches the server configuration variable.<br>
+                                    <em>Body:</em> <code>{ "token": "super_secret_key_123" }</code><br>
+                                    <em>Success response:</em>
+                                    <code>{ "success": true, "message": "Poll reset" }</code><br>
+                                    <em>Error response:</em>
+                                    <code>{ "success": false, "message": "Invalid token" }</code> (Status 403)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
