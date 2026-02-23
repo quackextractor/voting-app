@@ -20,6 +20,13 @@ afterAll(async () => {
 
 describe('Voting API Endpoints', () => {
 
+    it('should return health status', async () => {
+        const res = await request(app).get('/api/health');
+        expect(res.statusCode).toEqual(200);
+        expect(res.body.status).toBe('ok');
+        expect(res.body.timestamp).toBeDefined();
+    });
+
     it('should return initial results', async () => {
         const res = await request(app).get('/api/results');
         expect(res.statusCode).toEqual(200);

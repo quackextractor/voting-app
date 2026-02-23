@@ -4,6 +4,10 @@ const crypto = require('crypto');
 
 const router = express.Router();
 
+router.get('/health', (req, res) => {
+    res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
 const getClientIdentifiers = (req, res) => {
     const ip = req.ip || req.connection.remoteAddress;
     let cookie = req.cookies.clientId;

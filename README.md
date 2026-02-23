@@ -41,6 +41,19 @@ You can deploy this application on Render.com in a few different ways. Here is t
    - **Publish Directory:** `dist`
 4. In your frontend codebase, you will need to update the API fetch URLs to point to your new Backend Web Service URL (e.g., `https://your-backend.onrender.com/api/vote` instead of `/api/vote`). You can do this by using environment variables (`import.meta.env.VITE_API_URL`) in Vite.
 
+## Monitoring with UptimeRobot
+
+To ensure your application is always up and running, it is recommended to set up monitoring with [UptimeRobot](https://uptimerobot.com/).
+
+1.  **Create a Monitor:** In your UptimeRobot dashboard, click **Add New Monitor**.
+2.  **Monitor Type:** Select **HTTP(s)**.
+3.  **Friendly Name:** Enter a name like `Voting App Backend`.
+4.  **URL (or IP):** Enter your backend health check URL (e.g., `https://your-backend.onrender.com/health`).
+5.  **Monitoring Interval:** Set your preferred interval (e.g., every 5 minutes).
+6.  **Create Monitor:** Click **Create Monitor** to start tracking.
+
+UptimeRobot will now alert you if the backend becomes unreachable.
+
 ## Local Development
 
 ### Prerequisites
