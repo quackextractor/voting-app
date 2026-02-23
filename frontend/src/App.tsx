@@ -2,7 +2,6 @@ import { useState } from 'react'
 import './App.css'
 import { PollForm } from './components/PollForm'
 import { PollResults } from './components/PollResults'
-import { ResetAdmin } from './components/ResetAdmin'
 
 function App() {
   const [view, setView] = useState<'vote' | 'results'>('vote')
@@ -30,10 +29,6 @@ function App() {
               onBackToVote={() => setView('vote')}
             />
           )}
-
-          <div className="mt-16 w-full border-t pt-8 border-slate-200">
-            <ResetAdmin onReset={() => setView('results')} />
-          </div>
         </main>
 
         <footer className="mt-20 text-center text-slate-400 text-sm">

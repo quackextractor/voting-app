@@ -19,6 +19,14 @@ app.set('trust proxy', true);
 
 const path = require('path');
 
+app.get('/health', (req, res) => {
+    res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
+app.get('/admin', (req, res) => {
+    res.sendFile(path.join(__dirname, 'static/admin.html'));
+});
+
 app.use('/api', apiRoutes);
 
 // Serve frontend static files
