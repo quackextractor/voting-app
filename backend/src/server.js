@@ -17,7 +17,17 @@ app.use(cookieParser());
 // Trust proxy to get real IP if behind a reverse proxy (useful for production)
 app.set('trust proxy', true);
 
+const path = require('path');
+
 app.use('/api', apiRoutes);
+
+// Serve frontend static files
+app.use(express.static(path.join(__dirname, '../../frontend/dist')));
+
+// Catch-all route to serve the React app for non-API requests
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
+});
 
 // Define startServer function to allow easy testing
 const startServer = async (port = process.env.PORT || 3000) => {

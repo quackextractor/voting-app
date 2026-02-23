@@ -253,7 +253,8 @@
                                 <td><span class="badge bg-primary">POST</span></td>
                                 <td><code>/api/vote</code></td>
                                 <td>
-                                    Saves a new user vote.<br>
+                                    Saves a new user vote. <strong>Security:</strong> Double-voting is prevented using
+                                    IP tracking and persistent client cookies.<br>
                                     <em>Body:</em> <code>{ "optionId": "b" }</code><br>
                                     <em>Response:</em> <code>{ "success": true, "options": [...] }</code>
                                 </td>
