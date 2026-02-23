@@ -1,11 +1,50 @@
 const express = require('express');
-const { getResults, hasVoted, addVote, resetVotes } = require('./database');
+const { getResults, hasVoted, addVote, resetVotes, getTotalVotes } = require('./database');
 const crypto = require('crypto');
+const os = require('os');
 
 const router = express.Router();
 
-router.get('/health', (req, res) => {
-    res.json({ status: 'ok', timestamp: new Date().toISOString() });
+router.get('/health', async (req, res) => {
+    try {
+        const totalVotes = await getTotalVotes();
+        res.json({
+            status: 'ok',
+            timestamp: new Date().toISOString(),
+            uptime: process.uptime(),
+            totalVotes
+        });
+    } catch (err) {
+        res.status(500).json({ status: 'error', message: err.message });
+    }
+});
+
+router.get('/stats', async (req, res) => {
+    try {
+        const totalVotes = await getTotalVotes();
+        res.json({
+            uptime: {
+                process: Math.floor(process.uptime()),
+                system: Math.floor(os.uptime())
+            },
+            memory: {
+                free: os.freemem(),
+                total: os.totalmem(),
+                usage: process.memoryUsage()
+            },
+            application: {
+                totalVotes,
+                version: '1.2.0'
+            },
+            system: {
+                platform: os.platform(),
+                cpuCount: os.cpus().length,
+                loadAvg: os.loadavg()
+            }
+        });
+    } catch (err) {
+        res.status(500).json({ success: false, message: 'Stats error' });
+    }
 });
 
 const getClientIdentifiers = (req, res) => {

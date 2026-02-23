@@ -5,13 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-02-23
+### Added
+- Real-time System Monitor dashboard at `/monitor`.
+- Enhanced `/health` and `/api/stats` endpoints with system metrics (uptime, memory, etc.).
+- Integrated voting statistics into the monitoring core.
+
 ## [1.2.0] - 2026-02-23
 ### Added
 - Migrated Admin Panel to a standalone server-side route at `/admin`.
 - Decoupled admin functionality from the React frontend for improved separation.
 - Standalone premium-styled `admin.html` served directly by the backend.
 - Refined `/health` check to be served from the root level.
-
 ## [1.1.0] - 2026-02-23
 ### Added
 - Health check endpoint (`/health`) for backend monitoring.

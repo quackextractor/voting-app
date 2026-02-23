@@ -19,8 +19,23 @@ app.set('trust proxy', true);
 
 const path = require('path');
 
-app.get('/health', (req, res) => {
-    res.json({ status: 'ok', timestamp: new Date().toISOString() });
+app.get('/health', async (req, res) => {
+    const { getTotalVotes } = require('./database');
+    try {
+        const totalVotes = await getTotalVotes();
+        res.json({
+            status: 'ok',
+            timestamp: new Date().toISOString(),
+            uptime: process.uptime(),
+            totalVotes
+        });
+    } catch (err) {
+        res.json({ status: 'ok', timestamp: new Date().toISOString(), uptime: process.uptime() });
+    }
+});
+
+app.get('/monitor', (req, res) => {
+    res.sendFile(path.join(__dirname, 'static/monitor.html'));
 });
 
 app.get('/admin', (req, res) => {

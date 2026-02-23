@@ -110,6 +110,15 @@ const closeDb = () => {
     });
 }
 
+const getTotalVotes = () => {
+    return new Promise((resolve, reject) => {
+        db.get(`SELECT COUNT(*) as count FROM votes`, (err, row) => {
+            if (err) reject(err);
+            else resolve(row.count);
+        });
+    });
+};
+
 module.exports = {
     db,
     initDb,
@@ -117,5 +126,6 @@ module.exports = {
     hasVoted,
     addVote,
     resetVotes,
+    getTotalVotes,
     closeDb
 };
