@@ -6,7 +6,8 @@ A full-stack web application for creating and managing a single question poll. B
 
 - **Vote:** Users can vote on options but are prevented from double voting using a combination of IP address tracking and a persistent cookie footprint.
 - **View Results:** Real-time (auto-refreshed) view of the current poll standings with animated progress bars.
-- **Admin Reset:** Allows resetting all poll data safely using a secure token.
+- **Admin Panel:** A standalone, premium control panel at `/admin` for resetting the poll safely using a secure token. Decoupled from the main React app.
+- **Health Check:** A monitoring-friendly endpoint at `/health` returning system status.
 
 ## Directory Structure
 
