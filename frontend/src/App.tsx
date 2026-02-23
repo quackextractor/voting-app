@@ -7,8 +7,27 @@ function App() {
   const [view, setView] = useState<'vote' | 'results'>('vote')
 
   return (
-    <div className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8 font-sans">
-      <div className="max-w-7xl mx-auto flex flex-col items-center">
+    <div className="min-h-screen bg-slate-50 font-sans">
+      {/* Unified Navigation Panel */}
+      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16">
+            <div className="flex items-center space-x-8">
+              <a href="/" className="flex items-center text-slate-900 font-extrabold text-lg">
+                <span className="text-primary mr-2">☕</span> Coffee Poll
+              </a>
+              <div className="hidden sm:flex space-x-4">
+                <a href="/" className="px-3 py-2 rounded-md text-sm font-medium text-primary bg-blue-50">Poll</a>
+                <a href="/admin" className="px-3 py-2 rounded-md text-sm font-medium text-slate-500 hover:text-primary hover:bg-slate-100 transition-all">Admin</a>
+                <a href="/monitor" className="px-3 py-2 rounded-md text-sm font-medium text-slate-500 hover:text-primary hover:bg-slate-100 transition-all">Monitor</a>
+                <a href="/docs" className="px-3 py-2 rounded-md text-sm font-medium text-slate-500 hover:text-primary hover:bg-slate-100 transition-all">Docs</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div className="max-w-7xl mx-auto flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8">
         <header className="mb-12 text-center">
           <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl md:text-6xl">
             Coffee <span className="text-primary">Poll</span>
