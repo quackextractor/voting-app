@@ -15,3 +15,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - TailwindCSS v4 and shadcn-ui components (Card, Button, Input, RadioGroup, Progress).
 - Automated backend integration tests using Jest and Supertest.
 - Full deployment documentation for Render.com.
+- Fixed single-service deployment error by using Express 5 compatible wildcard routing.
