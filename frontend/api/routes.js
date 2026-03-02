@@ -1,7 +1,7 @@
-const express = require('express');
-const { getResults, hasVoted, addVote, resetVotes, getTotalVotes } = require('./database');
-const crypto = require('crypto');
-const os = require('os');
+import express from 'express';
+import { getResults, hasVoted, addVote, resetVotes, getTotalVotes } from './database.js';
+import crypto from 'crypto';
+import os from 'os';
 
 const router = express.Router();
 
@@ -109,4 +109,4 @@ router.post('/reset', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

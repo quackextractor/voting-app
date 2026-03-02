@@ -12,30 +12,28 @@ A full-stack web application for creating and managing a single question poll. B
 
 ## Directory Structure
 
-- `frontend/`: The React + Vite application with TailwindCSS and shadcn-ui components.
-- `backend/`: The Node.js Express server acting as the REST API and interfacing with SQLite.
+- `frontend/`: The unified application containing both the React UI and the Node.js API.
+  - `frontend/src/`: React + Vite application.
+  - `frontend/api/`: Express.js serverless functions (Vercel-native).
 
 ## Deployment on Vercel & Supabase (Recommended)
 
-This application is optimized for the modern web. You can deploy the frontend to **Vercel** and use **Supabase** as your persistent database.
+This application is now a unified project designed for **Vercel**.
 
 ### 1. Database Setup (Supabase)
 1. Create a new project on [Supabase](https://supabase.com/).
-2. Go to the **SQL Editor** and run the contents of `backend/supabase_schema.sql` to initialize your tables.
+2. Go to the **SQL Editor** and run the contents of `frontend/api/supabase_schema.sql` to initialize your tables.
 3. Go to **Project Settings > Database** and copy your **Connection String (URI)**.
    - It should look like: `postgresql://postgres:[PASSWORD]@db.[PROJECT-ID].supabase.co:5432/postgres`
 
-### 2. Backend Deployment (e.g., Render)
-1. Follow the [Render.com](#deployment-on-rendercom) instructions below.
-2. Add an environment variable `DATABASE_URL` with your Supabase connection string.
-3. The backend will automatically detect this and switch to PostgreSQL mode.
-
-### 3. Frontend Deployment (Vercel)
+### 2. Unified Deployment (Vercel)
 1. Push your code to GitHub.
 2. Import your repository into [Vercel](https://vercel.com/new).
-3. Set the following **Environment Variables**:
-   - `VITE_API_BASE_URL`: The URL of your deployed backend (e.g., `https://your-backend.onrender.com`).
-4. Vercel will use the `vercel.json` file to configure the deployment automatically.
+3. Set the **Root Directory** to `frontend`.
+4. Set the following **Environment Variables**:
+   - `DATABASE_URL`: Your Supabase connection string.
+   - `VITE_API_BASE_URL`: (Optional) Can be left empty for Vercel, as rewrites are handled by `vercel.json`.
+5. Vercel will automatically deploy the frontend and the `api/` folder as Serverless Functions.
 
 ## Deployment on Render.com
 
