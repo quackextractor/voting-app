@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.0] - 2026-03-02
+### Changed
+- Standardized database setup to use generic PostgreSQL environment variables (`DATABASE_URL`, `DIRECT_URL`).
+- Renamed `ADMIN_RESET_TOKEN` to `JWT_SECRET` for generic compatibility and updated reset logic and tests.
+- Added `NPM_CONFIG_IGNORE_SCRIPTS=true` to default environment configuration.
+- Removed Supabase-specific suffixes from backend connection logging.
+
 ## [1.7.0] - 2026-03-02
 ### Added
 - Created an explicit root `/` route on the Express API server to provide a helpful message during local development.

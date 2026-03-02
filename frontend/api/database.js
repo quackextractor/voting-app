@@ -20,7 +20,7 @@ if (databaseUrl && !isTestEnv) {
         ssl: { rejectUnauthorized: false }
     });
     isPostgres = true;
-    console.log('Using PostgreSQL (Supabase)');
+    console.log('Using PostgreSQL');
 } else {
     const dataDir = path.join(__dirname, '../data');
     if (!fs.existsSync(dataDir)) {

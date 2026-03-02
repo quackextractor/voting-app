@@ -83,7 +83,7 @@ describe('Voting API Endpoints (Unified)', () => {
     });
 
     it('should reset votes with correct token', async () => {
-        process.env.ADMIN_RESET_TOKEN = 'test_admin_token';
+        process.env.JWT_SECRET = 'test_admin_token';
 
         const res = await request(app)
             .post('/api/reset')

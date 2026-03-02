@@ -95,7 +95,7 @@ router.post('/vote', async (req, res) => {
 router.post('/reset', async (req, res) => {
     try {
         const { token } = req.body;
-        const adminToken = process.env.ADMIN_RESET_TOKEN || 'admin123';
+        const adminToken = process.env.JWT_SECRET || 'admin123';
 
         if (token !== adminToken) {
             return res.status(403).json({ success: false, message: 'Invalid token' });

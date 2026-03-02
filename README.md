@@ -16,23 +16,25 @@ A full-stack web application for creating and managing a single question poll. B
   - `frontend/src/`: React + Vite application.
   - `frontend/api/`: Express.js serverless functions (Vercel-native).
 
-## Deployment on Vercel & Supabase (Recommended)
+## Deployment on Vercel & PostgreSQL (Recommended)
 
-This application is now a unified project designed for **Vercel**.
+This application is now a unified project designed for **Vercel** with a standard **PostgreSQL** backend.
 
-### 1. Database Setup (Supabase)
-1. Create a new project on [Supabase](https://supabase.com/).
-2. Go to the **SQL Editor** and run the contents of `frontend/api/supabase_schema.sql` to initialize your tables.
-3. Go to **Project Settings > Database** and copy your **Connection String (URI)**.
-   - It should look like: `postgresql://postgres:[PASSWORD]@db.[PROJECT-ID].supabase.co:5432/postgres`
+### 1. Database Setup
+1. Create a new PostgreSQL database (e.g., on Supabase, Neon, or Railway).
+2. Go to your database provider's SQL Editor and run the contents of `frontend/api/supabase_schema.sql` to initialize your tables.
+3. Obtain your **Connection String (URI)** and **Direct Connection String**.
 
 ### 2. Unified Deployment (Vercel)
 1. Push your code to GitHub.
 2. Import your repository into [Vercel](https://vercel.com/new).
 3. Set the **Root Directory** to `frontend`.
 4. Set the following **Environment Variables**:
-   - `DATABASE_URL`: Your Supabase connection string.
-   - `VITE_API_BASE_URL`: (Optional) Can be left empty for Vercel, as rewrites are handled by `vercel.json`.
+   - `DATABASE_URL`: Your PostgreSQL connection string.
+   - `DIRECT_URL`: Your direct PostgreSQL connection string (for migrations).
+   - `JWT_SECRET`: A secure secret token for admin reset functionality.
+   - `NPM_CONFIG_IGNORE_SCRIPTS`: Set to `true` to skip scripts during build.
+   - `VITE_API_BASE_URL`: (Optional) Can be left empty for Vercel.
 5. Vercel will automatically deploy the frontend and the `api/` folder as Serverless Functions.
 
 ## Deployment on Render.com
