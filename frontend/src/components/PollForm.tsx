@@ -30,8 +30,9 @@ export const PollForm: React.FC<PollFormProps> = ({ onVoteSuccess, onViewResults
             if (voteError) throw voteError;
 
             onVoteSuccess();
-        } catch (err: any) {
-            setError(err.message || 'Error submitting vote');
+        } catch (err) {
+            const message = err instanceof Error ? err.message : 'Error submitting vote';
+            setError(message);
         } finally {
             setLoading(false);
         }

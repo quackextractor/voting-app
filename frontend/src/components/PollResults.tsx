@@ -34,15 +34,16 @@ export const PollResults: React.FC<PollResultsProps> = ({ onBackToVote }) => {
 
             if (fetchError) throw fetchError;
 
-            const mappedResults = data.map((opt: any) => ({
+            const mappedResults = (data || []).map((opt: { id: string; text: string; votes: { count: number }[] }) => ({
                 id: opt.id,
                 text: opt.text,
                 votes: opt.votes[0]?.count || 0
             }));
 
             setResults(mappedResults);
-        } catch (err: any) {
-            setError(err.message || 'Failed to fetch results');
+        } catch (err) {
+            const message = err instanceof Error ? err.message : 'Failed to fetch results';
+            setError(message);
         } finally {
             setLoading(false);
         }
