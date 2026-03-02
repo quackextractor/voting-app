@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
-import { supabase } from '../lib/supabase';
 
 interface ResetAdminProps {
     onReset: () => void;
@@ -19,23 +18,25 @@ export const ResetAdmin: React.FC<ResetAdminProps> = ({ onReset }) => {
         setMessage(null);
 
         try {
-            // In a frontend-only app, we rely on the user providing a "token" 
-            // but the actual security should be handled by Supabase RLS.
-            // For now, we'll simulate the "token" check if it matches the JWT_SECRET from local env (if exposed)
-            // or just proceed if the user intended to bypass the backend.
+            const response = await fetch('/api/reset', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ token }),
+            });
 
-            const { error: resetError } = await supabase
-                .from('votes')
-                .delete()
-                .neq('id', 0); // Delete all rows
+            const data = await response.json();
 
-            if (resetError) throw resetError;
-
-            setMessage({ type: 'success', text: 'Poll has been successfully reset!' });
-            setToken('');
-            onReset();
-        } catch (err: any) {
-            setMessage({ type: 'error', text: err.message || 'Error resetting poll' });
+            if (response.ok) {
+                setMessage({ type: 'success', text: 'Poll has been successfully reset!' });
+                setToken('');
+                onReset();
+            } else {
+                setMessage({ type: 'error', text: data.message || 'Invalid token' });
+            }
+        } catch (err) {
+            setMessage({ type: 'error', text: 'Server error' });
         } finally {
             setLoading(false);
         }

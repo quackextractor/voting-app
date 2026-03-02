@@ -3,7 +3,6 @@ import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { RadioGroup, RadioGroupItem } from './ui/radio-group';
 import { Label } from '@radix-ui/react-label';
-import { supabase } from '../lib/supabase';
 
 interface PollFormProps {
     onVoteSuccess: () => void;
@@ -23,15 +22,24 @@ export const PollForm: React.FC<PollFormProps> = ({ onVoteSuccess, onViewResults
         setError(null);
 
         try {
-            const { error: voteError } = await supabase
-                .from('votes')
-                .insert([{ option_id: optionId }]);
+            const baseUrl = import.meta.env.VITE_API_BASE_URL || '';
+            const response = await fetch(`${baseUrl}/api/vote`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ optionId }),
+            });
 
-            if (voteError) throw voteError;
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || 'Error submitting vote');
+            }
 
             onVoteSuccess();
         } catch (err: any) {
-            setError(err.message || 'Error submitting vote');
+            setError(err.message);
         } finally {
             setLoading(false);
         }
