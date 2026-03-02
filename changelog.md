@@ -5,15 +5,6 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.7.0] - 2026-03-02
-### Added
-- Created an explicit root `/` route on the Express API server to provide a helpful message during local development.
-
-### Changed
-- Migrated Supabase backend logic schema setup to use `$1, $2` and `?, ?` directly instead of regex replacement for stability.
-- Moved `vercel.json` from the root into the `frontend/` directory to satisfy Vercel monorepo deployment configurations.
-- Consolidated backend API static files (Monitor, Admin, Docs) so they are correctly served by Express resolving deep paths (`api/static`).
-
 ## [1.6.0] - 2026-03-02
 ### Changed
 - Refactored project into a unified architecture, moving backend logic into the `frontend/api/` directory.

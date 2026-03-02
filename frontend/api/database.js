@@ -158,10 +158,10 @@ export const getResults = () => {
 
 export const hasVoted = async (ip, cookie) => {
     if (!ip && !cookie) return false;
-    const pgSql = `SELECT COUNT(*) as count FROM votes WHERE (client_ip = $1 AND client_ip IS NOT NULL) OR (client_cookie = $2 AND client_cookie IS NOT NULL)`;
+    const sql = `SELECT COUNT(*) as count FROM votes WHERE (client_ip = $1 AND client_ip IS NOT NULL) OR (client_cookie = $2 AND client_cookie IS NOT NULL)`;
     const sqliteSql = `SELECT COUNT(*) as count FROM votes WHERE (client_ip = ? AND client_ip IS NOT NULL) OR (client_cookie = ? AND client_cookie IS NOT NULL)`;
 
-    const row = await getQuery(isPostgres ? pgSql : sqliteSql, [ip, cookie]);
+    const row = await getQuery(isPostgres ? sql.replace(/\?/g, '$1') : sqliteSql, [ip, cookie]);
     return parseInt(row.count) > 0;
 };
 
