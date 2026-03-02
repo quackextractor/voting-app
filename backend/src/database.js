@@ -1,12 +1,7 @@
-import sqlite3 from 'sqlite3';
-import pg from 'pg';
-const { Pool } = pg;
-import path from 'path';
-import fs from 'fs';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const sqlite3 = require('sqlite3').verbose();
+const { Pool } = require('pg');
+const path = require('path');
+const fs = require('fs');
 
 const isTestEnv = process.env.NODE_ENV === 'test';
 const databaseUrl = process.env.DATABASE_URL;
@@ -79,7 +74,7 @@ const allQuery = (sql, params = []) => {
     });
 };
 
-export const initDb = async () => {
+const initDb = async () => {
     if (isPostgres) {
         await db.query(`CREATE TABLE IF NOT EXISTS options (
             id TEXT PRIMARY KEY,
@@ -138,7 +133,16 @@ export const initDb = async () => {
     }
 };
 
-export const getResults = () => {
+const getResults = () => {
+    const sql = `
+        SELECT o.id, o.text, COUNT(v.id)::int as votes 
+        FROM options o
+        LEFT JOIN votes v ON o.id = v.option_id
+        GROUP BY o.id, o.text
+        ORDER BY o.id
+    `;
+    // SQLite doesn't strictly need ::int, but we can handle it in the wrapper if needed.
+    // Actually, SQLite doesn't support ::int. Let's adjust the query.
     const pgSql = `
         SELECT o.id, o.text, COUNT(v.id)::int as votes 
         FROM options o
@@ -156,7 +160,7 @@ export const getResults = () => {
     return allQuery(isPostgres ? pgSql : sqliteSql);
 };
 
-export const hasVoted = async (ip, cookie) => {
+const hasVoted = async (ip, cookie) => {
     if (!ip && !cookie) return false;
     const sql = `SELECT COUNT(*) as count FROM votes WHERE (client_ip = $1 AND client_ip IS NOT NULL) OR (client_cookie = $2 AND client_cookie IS NOT NULL)`;
     const sqliteSql = `SELECT COUNT(*) as count FROM votes WHERE (client_ip = ? AND client_ip IS NOT NULL) OR (client_cookie = ? AND client_cookie IS NOT NULL)`;
@@ -165,7 +169,7 @@ export const hasVoted = async (ip, cookie) => {
     return parseInt(row.count) > 0;
 };
 
-export const addVote = async (optionId, ip, cookie) => {
+const addVote = async (optionId, ip, cookie) => {
     if (isPostgres) {
         const res = await db.query(
             `INSERT INTO votes (option_id, client_ip, client_cookie) VALUES ($1, $2, $3) RETURNING id`,
@@ -181,11 +185,11 @@ export const addVote = async (optionId, ip, cookie) => {
     }
 };
 
-export const resetVotes = () => {
+const resetVotes = () => {
     return runQuery(`DELETE FROM votes`);
 };
 
-export const closeDb = () => {
+const closeDb = () => {
     return new Promise((resolve, reject) => {
         if (isPostgres) {
             db.end(err => {
@@ -201,12 +205,12 @@ export const closeDb = () => {
     });
 };
 
-export const getTotalVotes = async () => {
+const getTotalVotes = async () => {
     const row = await getQuery(`SELECT COUNT(*) as count FROM votes`);
     return parseInt(row.count);
 };
 
-export default {
+module.exports = {
     db,
     initDb,
     getResults,

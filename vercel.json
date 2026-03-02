@@ -1,22 +1,7 @@
 {
     "version": 2,
+    "public": true,
     "rewrites": [
-        {
-            "source": "/api/(.*)",
-            "destination": "/api/index.js"
-        },
-        {
-            "source": "/monitor",
-            "destination": "/api/index.js"
-        },
-        {
-            "source": "/admin",
-            "destination": "/api/index.js"
-        },
-        {
-            "source": "/docs",
-            "destination": "/api/index.js"
-        },
         {
             "source": "/(.*)",
             "destination": "/index.html"
