@@ -34,9 +34,8 @@ export const ResetAdmin: React.FC<ResetAdminProps> = ({ onReset }) => {
             setMessage({ type: 'success', text: 'Poll has been successfully reset!' });
             setToken('');
             onReset();
-        } catch (err) {
-            const message = err instanceof Error ? err.message : 'Error resetting poll';
-            setMessage({ type: 'error', text: message });
+        } catch (err: any) {
+            setMessage({ type: 'error', text: err.message || 'Error resetting poll' });
         } finally {
             setLoading(false);
         }
