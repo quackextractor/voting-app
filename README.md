@@ -34,6 +34,9 @@ This application is now a unified project designed for **Vercel** with a standar
    - `DIRECT_URL`: Your direct PostgreSQL connection string (for migrations).
    - `JWT_SECRET`: A secure secret token for admin reset functionality.
    - `NPM_CONFIG_IGNORE_SCRIPTS`: Set to `true` to skip scripts during build.
+   - `VITE_SUPABASE_URL`: Your Supabase Project URL.
+   - `VITE_SUPABASE_ANON_KEY`: Your Supabase Anon/Public API key.
+   - `SUPABASE_SERVICE_ROLE_KEY`: Your Supabase Service Role API key.
    - `VITE_API_BASE_URL`: (Optional) Can be left empty for Vercel.
 5. Vercel will automatically deploy the frontend and the `api/` folder as Serverless Functions.
 

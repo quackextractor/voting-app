@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from './ui/card';
 import { Progress } from './ui/progress';
 import { Button } from './ui/button';
+import { supabase } from '../lib/supabase';
 
 interface Option {
     id: string;
@@ -21,13 +22,27 @@ export const PollResults: React.FC<PollResultsProps> = ({ onBackToVote }) => {
 
     const fetchResults = async () => {
         try {
-            const baseUrl = import.meta.env.VITE_API_BASE_URL || '';
-            const response = await fetch(`${baseUrl}/api/results`);
-            if (!response.ok) throw new Error('Failed to fetch results');
-            const data = await response.json();
-            setResults(data.options);
+            // Using Supabase to get options and join with vote counts
+            const { data, error: fetchError } = await supabase
+                .from('options')
+                .select(`
+                    id,
+                    text,
+                    votes (count)
+                `)
+                .order('id');
+
+            if (fetchError) throw fetchError;
+
+            const mappedResults = data.map((opt: any) => ({
+                id: opt.id,
+                text: opt.text,
+                votes: opt.votes[0]?.count || 0
+            }));
+
+            setResults(mappedResults);
         } catch (err: any) {
-            setError(err.message);
+            setError(err.message || 'Failed to fetch results');
         } finally {
             setLoading(false);
         }
