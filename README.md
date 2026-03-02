@@ -15,33 +15,29 @@ A full-stack web application for creating and managing a single question poll. B
 - `frontend/`: The React + Vite application with TailwindCSS and shadcn-ui components.
 - `backend/`: The Node.js Express server acting as the REST API and interfacing with SQLite.
 
+## Deployment on Vercel & Supabase (Recommended)
+
+This application is optimized for the modern web. You can deploy the frontend to **Vercel** and use **Supabase** as your persistent database.
+
+### 1. Database Setup (Supabase)
+1. Create a new project on [Supabase](https://supabase.com/).
+2. Go to the **SQL Editor** and run the contents of `backend/supabase_schema.sql` to initialize your tables.
+3. Go to **Project Settings > Database** and copy your **Connection String (URI)**.
+   - It should look like: `postgresql://postgres:[PASSWORD]@db.[PROJECT-ID].supabase.co:5432/postgres`
+
+### 2. Backend Deployment (e.g., Render)
+1. Follow the [Render.com](#deployment-on-rendercom) instructions below.
+2. Add an environment variable `DATABASE_URL` with your Supabase connection string.
+3. The backend will automatically detect this and switch to PostgreSQL mode.
+
+### 3. Frontend Deployment (Vercel)
+1. Push your code to GitHub.
+2. Import your repository into [Vercel](https://vercel.com/new).
+3. Set the following **Environment Variables**:
+   - `VITE_API_BASE_URL`: The URL of your deployed backend (e.g., `https://your-backend.onrender.com`).
+4. Vercel will use the `vercel.json` file to configure the deployment automatically.
+
 ## Deployment on Render.com
-
-You can deploy this application on Render.com in a few different ways. Here is the recommended approach to deploy the frontend as a Static Site and the backend as a Web Service.
-
-> **Important Note about SQLite on Render:**
-> Standard Render Web Services use an ephemeral file system. This means that every time the backend service restarts or redeploys, your `poll.sqlite` database file will be wiped clean and reset to zero. To preserve data across restarts, you need to use a **Render Disk** (which requires a paid plan). Alternatively, you must switch your database from SQLite to PostgreSQL (which Render provides).
-
-### 1. Deploying the Backend (Web Service)
-1. Go to your Render Dashboard and click **New > Web Service**.
-2. Connect your GitHub repository.
-3. Configure the following settings:
-   - **Root Directory:** `backend`
-   - **Environment:** `Node`
-   - **Build Command:** `npm install`
-   - **Start Command:** `npm start`
-4. Add the following **Environment Variables**:
-   - `ADMIN_RESET_TOKEN`: (Enter a secure string you will use for resetting)
-   - `CORS_ORIGIN`: (Set this after deploying the frontend, e.g., `https://your-frontend.onrender.com`)
-
-### 2. Deploying the Frontend (Static Site)
-1. Go to your Render Dashboard and click **New > Static Site**.
-2. Connect your GitHub repository.
-3. Configure the following settings:
-   - **Root Directory:** `frontend`
-   - **Build Command:** `npm install && npm run build`
-   - **Publish Directory:** `dist`
-4. In your frontend codebase, you will need to update the API fetch URLs to point to your new Backend Web Service URL (e.g., `https://your-backend.onrender.com/api/vote` instead of `/api/vote`). You can do this by using environment variables (`import.meta.env.VITE_API_URL`) in Vite.
 
 ## Monitoring with UptimeRobot
 

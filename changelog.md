@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] - 2026-03-02
+### Added
+- External database support for Supabase (PostgreSQL).
+- Hybrid database logic: dynamic switching between SQLite and PostgreSQL via `DATABASE_URL`.
+- Vercel deployment configuration for the frontend.
+- Frontend environment variable support for API base URL via `VITE_API_BASE_URL`.
+- Supabase initialization schema `supabase_schema.sql`.
+
 ## [1.4.1] - 2026-02-23
 ### Changed
 - Replaced coffee emoji `☕` with a professional Lucide logo icon for a consistent, state-of-the-art rebranding across all application interfaces.

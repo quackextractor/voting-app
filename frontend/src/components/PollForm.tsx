@@ -22,7 +22,8 @@ export const PollForm: React.FC<PollFormProps> = ({ onVoteSuccess, onViewResults
         setError(null);
 
         try {
-            const response = await fetch('/api/vote', {
+            const baseUrl = import.meta.env.VITE_API_BASE_URL || '';
+            const response = await fetch(`${baseUrl}/api/vote`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

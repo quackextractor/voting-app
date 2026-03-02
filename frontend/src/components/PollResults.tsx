@@ -21,7 +21,8 @@ export const PollResults: React.FC<PollResultsProps> = ({ onBackToVote }) => {
 
     const fetchResults = async () => {
         try {
-            const response = await fetch('/api/results');
+            const baseUrl = import.meta.env.VITE_API_BASE_URL || '';
+            const response = await fetch(`${baseUrl}/api/results`);
             if (!response.ok) throw new Error('Failed to fetch results');
             const data = await response.json();
             setResults(data.options);
