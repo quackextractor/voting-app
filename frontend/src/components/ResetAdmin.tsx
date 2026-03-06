@@ -35,7 +35,7 @@ export const ResetAdmin: React.FC<ResetAdminProps> = ({ onReset }) => {
             } else {
                 setMessage({ type: 'error', text: data.message || 'Invalid token' });
             }
-        } catch (err) {
+        } catch {
             setMessage({ type: 'error', text: 'Server error' });
         } finally {
             setLoading(false);

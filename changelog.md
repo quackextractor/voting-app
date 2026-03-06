@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.1] - 2026-03-06
+### Fixed
+- Fixed build failures caused by unused variables (`Cpu`, `Clock`) in `DocsPage.tsx` and `MonitorPage.tsx`.
+- Resolved remaining frontend ESLint issues (removed `any` types and unused variables).
+
 ## [1.6.0] - 2026-03-06
 ### Changed
 - Major architectural upgrade: All statically served HTML backend pages (Docs, Monitor, Admin, Contact) have been migrated into the core React Single Page Application (SPA).

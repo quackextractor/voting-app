@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Activity, Cpu, Server, HardDrive, Clock } from 'lucide-react';
+import { Activity, Server, HardDrive } from 'lucide-react';
 
 interface Stats {
     application: {

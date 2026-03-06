@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileText, Cpu, LayoutTemplate, Network, LayoutDashboard } from 'lucide-react';
+import { FileText, LayoutTemplate, Network, LayoutDashboard } from 'lucide-react';
 
 export const DocsPage: React.FC = () => {
     return (

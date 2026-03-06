@@ -26,8 +26,8 @@ export const PollResults: React.FC<PollResultsProps> = ({ onBackToVote }) => {
             if (!response.ok) throw new Error('Failed to fetch results');
             const data = await response.json();
             setResults(data.options);
-        } catch (err: any) {
-            setError(err.message);
+        } catch (err: unknown) {
+            setError((err as Error).message);
         } finally {
             setLoading(false);
         }
