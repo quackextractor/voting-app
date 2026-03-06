@@ -10,6 +10,7 @@ Detail chyby: Na úvodní stránce a ostatních částech webu máš hlavní nav
 
 Návrh řešení: Jde sice jen o vizuální detail, ale sjednocení layoutu webu hodně pomůže. Doporučuji zkontrolovat CSS třídy nebo HTML šablonu specificky pro stránku "docs" a upravit zarovnání položek v hlavičce tak, aby odpovídalo hlavní stránce (zarovnání doleva).
 
+**[RESOLVED]**: Removed `ms-auto` class from `docs.html` navbar.
 
 2) 
 
@@ -18,7 +19,11 @@ Bylo by to uzitecne pro nahlaseni feedbacku.
 
 - create a contact page email: slezak@spsejecna.cz and report issues to https://github.com/quackextractor/voting-app/issues
 
+**[RESOLVED]**: Created `/contact` route serving `contact.html` and added link to all navigation bars.
+
 3)
 
 Na strance https://voting-app-lg18.onrender.com/ se muj hlas zobrazi s chybovou hlaskou az po opakovanem odkliknuti na "hlasovat".
 Jako uzivatel bych radsi rovnou videl, pro co jsem hlasoval; chybove hlasky me rozesmutnuji.
+
+**[RESOLVED]**: Updated `PollForm.tsx` to handle the specific `{ message: "You have already voted" }` error by silently redirecting to results without triggering an error dialog.

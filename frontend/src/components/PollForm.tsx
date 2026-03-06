@@ -34,6 +34,10 @@ export const PollForm: React.FC<PollFormProps> = ({ onVoteSuccess, onViewResults
             const data = await response.json();
 
             if (!response.ok) {
+                if (response.status === 403 && data.message === 'You have already voted') {
+                    onViewResults();
+                    return;
+                }
                 throw new Error(data.message || 'Error submitting vote');
             }
 

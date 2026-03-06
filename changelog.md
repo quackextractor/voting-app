@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.1] - 2026-03-06
+### Added
+- Created a new Contact page (`/contact`) and added it to all navigation menus for reporting issues and providing feedback.
+
+### Fixed
+- Fixed navigation menu alignment on the `/docs` page by removing the erroneous right-alignment class.
+- Fixed a user experience issue where voting twice displayed an error instead of smoothly transitioning to the results page.
+
 ## [1.5.0] - 2026-03-02
 ### Added
 - External database support for Supabase (PostgreSQL).

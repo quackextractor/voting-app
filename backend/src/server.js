@@ -46,6 +46,10 @@ app.get('/docs', (req, res) => {
     res.sendFile(path.join(__dirname, 'static/docs.html'));
 });
 
+app.get('/contact', (req, res) => {
+    res.sendFile(path.join(__dirname, 'static/contact.html'));
+});
+
 app.use('/api', apiRoutes);
 
 // Serve frontend static files

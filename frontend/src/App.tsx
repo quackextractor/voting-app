@@ -22,6 +22,7 @@ function App() {
                 <a href="/admin" className="px-3 py-2 rounded-md text-sm font-medium text-slate-500 hover:text-primary hover:bg-slate-100 transition-all">Admin</a>
                 <a href="/monitor" className="px-3 py-2 rounded-md text-sm font-medium text-slate-500 hover:text-primary hover:bg-slate-100 transition-all">Monitor</a>
                 <a href="/docs" className="px-3 py-2 rounded-md text-sm font-medium text-slate-500 hover:text-primary hover:bg-slate-100 transition-all">Docs</a>
+                <a href="/contact" className="px-3 py-2 rounded-md text-sm font-medium text-slate-500 hover:text-primary hover:bg-slate-100 transition-all">Contact</a>
               </div>
             </div>
           </div>
