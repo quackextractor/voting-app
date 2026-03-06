@@ -35,12 +35,6 @@ describe('Voting API Endpoints', () => {
         expect(res.body.options[0].votes).toBe(0);
     });
 
-    it('should serve the contact page', async () => {
-        const res = await request(app).get('/contact');
-        expect(res.statusCode).toEqual(200);
-        expect(res.text).toContain('Contact Information');
-    });
-
     it('should allow voting for a valid option', async () => {
         const res = await request(app)
             .post('/api/vote')

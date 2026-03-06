@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2026-03-06
+### Changed
+- Major architectural upgrade: All statically served HTML backend pages (Docs, Monitor, Admin, Contact) have been migrated into the core React Single Page Application (SPA).
+- Unified cohesive Tailwind CSS design and Shadcn components across the entire platform via a shared `Layout` wrapper component. 
+- Removed redundant Express routing for physical HTML deliveries.
+
 ## [1.5.1] - 2026-03-06
 ### Added
 - Created a new Contact page (`/contact`) and added it to all navigation menus for reporting issues and providing feedback.
