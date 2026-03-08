@@ -1,7 +1,9 @@
 import React from 'react';
 import { ResetAdmin } from '../components/ResetAdmin';
+import { useTitle } from '../hooks/useTitle';
 
 const AdminPage: React.FC = () => {
+    useTitle('Admin Panel');
     return (
         <div className="w-full max-w-4xl mx-auto px-4 py-12">
             <div className="bg-white rounded-2xl shadow-xl p-8 border border-slate-100">

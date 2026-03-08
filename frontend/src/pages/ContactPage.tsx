@@ -1,7 +1,9 @@
 import React from 'react';
 import { Mail, Github } from 'lucide-react';
+import { useTitle } from '../hooks/useTitle';
 
 export const ContactPage: React.FC = () => {
+    useTitle('Contact');
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
             <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 mb-8 flex items-center">

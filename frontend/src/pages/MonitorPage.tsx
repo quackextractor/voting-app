@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Activity, Server, HardDrive } from 'lucide-react';
+import { useTitle } from '../hooks/useTitle';
 
 interface Stats {
     application: {
@@ -22,6 +23,7 @@ interface Stats {
 }
 
 export const MonitorPage: React.FC = () => {
+    useTitle('System Monitor');
     const [stats, setStats] = useState<Stats | null>(null);
     const [lastUpdated, setLastUpdated] = useState<Date>(new Date());
 

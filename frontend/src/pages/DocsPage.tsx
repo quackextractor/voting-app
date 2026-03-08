@@ -1,7 +1,9 @@
 import React from 'react';
 import { FileText, LayoutTemplate, Network, LayoutDashboard } from 'lucide-react';
+import { useTitle } from '../hooks/useTitle';
 
 export const DocsPage: React.FC = () => {
+    useTitle('Documentation');
     return (
         <div className="max-w-5xl mx-auto px-4 py-12">
             <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 mb-10 border-b border-slate-200 pb-4">

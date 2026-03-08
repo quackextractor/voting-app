@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.9.0] - 2026-03-08
+### Added
+- Integrated dark mode support with a theme toggle in the main layout (Resolves #10).
+- Professional coffee-themed favicon to replace the default Vite icon (Resolves #8).
+- Dynamic page titles using a custom `useTitle` hook to improve tab identification (Resolves #9).
+
 ## [1.8.0] - 2026-03-08
 ### Changed
 - Refactored `App.tsx` routing to utilize `React.lazy` and `Suspense` for code-splitting. This drastically reduces the initial JavaScript payload by dynamically loading non-essential pages (Admin, Monitor, Docs, Contact) only when visited, resolving performance issues in the initial page load for voters (Resolves #7).

@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { PollForm } from '../components/PollForm';
 import { PollResults } from '../components/PollResults';
 import { Coffee } from 'lucide-react';
+import { useTitle } from '../hooks/useTitle';
 
 export const PollPage: React.FC = () => {
-    const [view, setView] = useState<'vote' | 'results'>('vote')
+    useTitle('Poll');
+    const [view, setView] = useState<'form' | 'results'>('form');
 
     return (
         <div className="max-w-7xl mx-auto flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8">
@@ -18,14 +20,14 @@ export const PollPage: React.FC = () => {
             </header>
 
             <div className="w-full">
-                {view === 'vote' ? (
+                {view === 'form' ? (
                     <PollForm
                         onVoteSuccess={() => setView('results')}
                         onViewResults={() => setView('results')}
                     />
                 ) : (
                     <PollResults
-                        onBackToVote={() => setView('vote')}
+                        onBackToVote={() => setView('form')}
                     />
                 )}
             </div>
