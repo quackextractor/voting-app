@@ -18,6 +18,7 @@ export const PollResults: React.FC<PollResultsProps> = ({ onBackToVote }) => {
     const [results, setResults] = useState<Option[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [userVote, setUserVote] = useState<string | null>(null);
 
     const fetchResults = async () => {
         try {
@@ -34,6 +35,10 @@ export const PollResults: React.FC<PollResultsProps> = ({ onBackToVote }) => {
     };
 
     useEffect(() => {
+        const storedVote = localStorage.getItem('userVote');
+        if (storedVote) {
+            setUserVote(storedVote);
+        }
         fetchResults();
         // Refresh results every 5 seconds
         const interval = setInterval(fetchResults, 5000);
@@ -55,17 +60,29 @@ export const PollResults: React.FC<PollResultsProps> = ({ onBackToVote }) => {
             <CardContent className="space-y-8">
                 {results.map((opt) => {
                     const percentage = totalVotes > 0 ? (opt.votes / totalVotes) * 100 : 0;
+                    const isUserVote = userVote === opt.id;
                     return (
-                        <div key={opt.id} className="space-y-2">
+                        <div key={opt.id} className={`space-y-2 p-3 border rounded-lg ${isUserVote ? 'border-primary bg-primary/5' : 'border-transparent'}`}>
                             <div className="flex justify-between items-end">
-                                <span className="text-base font-medium">{opt.text}</span>
+                                <span className="text-base font-medium flex items-center">
+                                    {opt.text}
+                                    {isUserVote && (
+                                        <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-primary text-primary-foreground">
+                                            Your vote
+                                        </span>
+                                    )}
+                                </span>
                                 <span className="text-sm text-muted-foreground">{opt.votes} votes ({percentage.toFixed(1)}%)</span>
                             </div>
                             <Progress value={percentage} className="h-3 rounded-full" />
                         </div>
                     );
                 })}
-                {error && <p className="text-destructive text-sm font-semibold">{error}</p>}
+                {error && (
+                    <div aria-live="polite">
+                        <p className="text-destructive text-sm font-semibold">{error}</p>
+                    </div>
+                )}
             </CardContent>
             <CardFooter className="flex flex-col space-y-4">
                 <p className="text-sm text-muted-foreground text-center w-full">Total votes: {totalVotes}</p>

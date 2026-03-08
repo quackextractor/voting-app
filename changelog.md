@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2026-03-08
+### Added
+- LocalStorage based vote persistence so users can see what they voted for (Resolves #1).
+- Duplicate vote prevention and warning UI to immediately inform users if they already voted (Resolves #2, #4).
+- Contact page link added to the main Layout footer for better discoverability (Resolves #3).
+- Comprehensive ARIA accessibility labels across the application for improved screen reader support (Resolves #6).
+
 ## [1.6.1] - 2026-03-06
 ### Fixed
 - Fixed build failures caused by unused variables (`Cpu`, `Clock`) in `DocsPage.tsx` and `MonitorPage.tsx`.

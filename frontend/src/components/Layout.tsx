@@ -9,7 +9,7 @@ export const Layout: React.FC = () => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
                         <div className="flex items-center space-x-8">
-                            <NavLink to="/" className="flex items-center text-slate-900 font-extrabold text-lg">
+                            <NavLink to="/" className="flex items-center text-slate-900 font-extrabold text-lg" aria-label="Home - Coffee Poll">
                                 <Coffee className="text-primary mr-2 h-6 w-6" strokeWidth={2.5} /> Coffee Poll
                             </NavLink>
                             <div className="hidden sm:flex space-x-4">
@@ -28,7 +28,12 @@ export const Layout: React.FC = () => {
                 <Outlet />
             </main>
 
-            <footer className="mt-20 text-center text-slate-400 text-sm pb-8">
+            <footer className="mt-20 text-center text-slate-400 text-sm pb-8 space-y-4">
+                <div>
+                    <NavLink to="/contact" className="text-primary hover:text-primary/80 font-semibold underline decoration-2 underline-offset-4" aria-label="Report an Issue or Contact Us">
+                        Report an Issue / Contact Us
+                    </NavLink>
+                </div>
                 <p>&copy; 2026 Voting App Project. All rights reserved.</p>
             </footer>
         </div>

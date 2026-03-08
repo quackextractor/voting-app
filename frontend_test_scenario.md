@@ -18,11 +18,18 @@ This document contains step-by-step instructions for the browser subagent to int
 6. **Test Navigation: Docs**
    - Click the "Docs" link in the header.
    - Verify that the page renders "Technical and Visual Design".
-7. **Test Navigation: Contact**
-   - Click the "Contact" link in the header.
+7. **Test Navigation: Contact from Footer**
+   - Scroll to the bottom of the page and click "Report an Issue / Contact Us" link in the footer.
    - Verify that the page renders "Contact Information" with "slezak@spsejecna.cz".
-8. **Test Navigation: Poll**
-   - Click the "Poll" link in the header.
-   - Verify that the original Coffee Poll question re-appears.
+8. **Test Voting Functionality**
+   - Go back to "Poll" link in the header.
+   - Verify that the original Coffee Poll question appears.
+   - Select option "a" ("0 to 1") and click "Vote"
+   - Confirm it redirects to the Results view and the "a" option has a "Your vote" badge displayed next to it.
+9. **Test Duplicate Vote Prevention**
+   - Click "Back to voting" underneath the Poll Results.
+   - Verify that the form now displays a "Already Voted" notification.
+   - Verify that the radio inputs and the "Vote" button are disabled or cannot be interacted with.
+   - Click the "Proceed to Results" button inside the warning notification and verify it returns to results.
 
-Return a report on how the unified UI looks, and confirm that all 5 links load successfully without triggering full page reloads.
+Return a report verifying that all features and routing logic work as expected.

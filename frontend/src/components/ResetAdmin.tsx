@@ -58,6 +58,7 @@ export const ResetAdmin: React.FC<ResetAdminProps> = ({ onReset }) => {
                         value={token}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setToken(e.target.value)}
                         className="border-2 focus-visible:ring-destructive"
+                        aria-label="Secret Token Input"
                     />
                     <Button variant="destructive" onClick={handleReset} disabled={loading || !token}>
                         {loading ? '...' : 'Reset'}
